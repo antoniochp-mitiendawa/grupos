@@ -59,6 +59,7 @@ function cargarAgendaLocal() {
         
         if (!fs.existsSync(CONFIG.archivo_agenda)) {
             console.log('📁 No hay agenda local (primera vez)');
+            // CORREGIDO: agendaEnMemoria viene como let desde config.js
             agendaEnMemoria = { grupos: [], pestanas: {}, total: 0 };
             return agendaEnMemoria;
         }
