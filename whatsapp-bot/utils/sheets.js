@@ -73,7 +73,9 @@ async function actualizarCacheProductos(url) {
         
         const data = await consultarTodosLosGrupos(url);
         if (data && data.productos && Array.isArray(data.productos)) {
-            productosCache = data.productos;
+            // CORREGIDO: productosCache viene como let desde config.js
+            productosCache.length = 0;
+            productosCache.push(...data.productos);
             ultimaActualizacionProductos = ahora;
             guardarLogLocal(`📦 Caché de productos actualizado: ${productosCache.length} productos`);
         }
