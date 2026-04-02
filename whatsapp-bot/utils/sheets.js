@@ -73,7 +73,7 @@ async function actualizarCacheProductos(url) {
         
         const data = await consultarTodosLosGrupos(url);
         if (data && data.productos && Array.isArray(data.productos)) {
-            // CORREGIDO: productosCache viene como let desde config.js
+            // CORREGIDO: vaciar el array existente en lugar de reasignar
             productosCache.length = 0;
             productosCache.push(...data.productos);
             ultimaActualizacionProductos = ahora;
