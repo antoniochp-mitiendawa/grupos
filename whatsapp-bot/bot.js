@@ -1,6 +1,6 @@
 // ============================================
-// BOT DE WHATSAPP PARA TERMUX - VERSIÓN MODULAR 1.0
-// ARCHIVO PRINCIPAL (ORQUESTADOR)
+// BOT DE WHATSAPP PARA TERMUX - VERSIÓN MODULAR 1.1
+// ARCHIVO PRINCIPAL (ORQUESTADOR) CON WAKE LOCK
 // ============================================
 
 const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, Browsers } = require('@whiskeysockets/baileys');
@@ -9,6 +9,19 @@ const fs = require('fs');
 const path = require('path');
 const cron = require('node-cron');
 const pino = require('pino');
+const { execSync } = require('child_process');
+
+// ============================================
+// ACTIVAR WAKE LOCK (evita que Termux se duerma)
+// ============================================
+try {
+    execSync('termux-wake-lock', { stdio: 'ignore' });
+    console.log('🔋 Wake lock activado (el bot no se dormirá con la pantalla apagada)');
+} catch (error) {
+    console.log('⚠️ No se pudo activar wake lock');
+    console.log('   Instala termux-api con: pkg install termux-api');
+    console.log('   Luego reinicia el bot\n');
+}
 
 // ============================================
 // IMPORTAR MÓDULOS
@@ -28,7 +41,7 @@ const { sincronizarGruposConSheets } = require('./agenda/sincronizar');
 const { limpiarStoreAntiguo } = require('./agenda/limpieza');
 const { procesarComandoPrioritario, procesandoComandoPrioritario } = require('./comandos/prioridad');
 const { enviarAlertaAdmin, generarEnlaceWaMe } = require('./utils/alertas');
-const { pedirNumeroSilencioso } = require('./utils/pedir_numero'); // lo crearemos después
+const { pedirNumeroSilencioso } = require('./utils/pedir_numero');
 
 // ============================================
 // CREAR CARPETAS NECESARIAS
@@ -60,7 +73,7 @@ setInterval(() => store.writeToFile(CONFIG.archivo_store), 10000);
 // ============================================
 async function iniciarWhatsApp() {
     console.log('====================================');
-    console.log('🤖 BOT WHATSAPP - VERSIÓN MODULAR 1.0');
+    console.log('🤖 BOT WHATSAPP - VERSIÓN MODULAR 1.1');
     console.log('====================================\n');
     console.log('⏰ Actualización de agenda: 6:00 AM');
     console.log('✍️  Typing adaptativo activado (máx 5 segundos)');
