@@ -113,7 +113,7 @@ const CONFIG = {
 };
 
 // ============================================
-// VARIABLES GLOBALES (USAR LET PARA LAS QUE SE REASIGNAN)
+// VARIABLES GLOBALES (CORREGIDO: LET EN LUGAR DE CONST)
 // ============================================
 let timersEnvios = [];
 let configNegocio = {};
