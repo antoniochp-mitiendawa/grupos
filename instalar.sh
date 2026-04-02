@@ -64,21 +64,7 @@ echo "🔋 Activando wake lock para mantener Termux activo..."
 termux-wake-lock
 echo "✅ Wake lock activado (el bot no se dormirá con la pantalla apagada)"
 
-# PASO 7: Crear script de inicio con wake lock
-echo "📝 Creando script de inicio con wake lock..."
-cat > start-bot.sh << 'EOF'
-#!/bin/bash
-echo "🔋 Activando wake lock..."
-termux-wake-lock
-echo "🚀 Iniciando bot..."
-cd /data/data/com.termux/files/home/grupos/whatsapp-bot
-node bot.js
-EOF
-
-chmod +x start-bot.sh
-echo "✅ Script start-bot.sh creado"
-
-# PASO 8: Preguntar si quiere iniciar
+# PASO 7: Preguntar si quiere iniciar
 echo "🤖 El bot ya está instalado"
 echo ""
 echo "¿Quieres iniciar el bot AHORA?"
@@ -92,16 +78,15 @@ if [ "$OPCION" == "1" ]; then
     echo "🚀 INICIANDO BOT CON WAKE LOCK..."
     echo "======================"
     echo ""
-    cd /data/data/com.termux/files/home/grupos/whatsapp-bot
-    termux-wake-lock
+    cd whatsapp-bot
     node bot.js
 else
     echo ""
     echo "📝 Para iniciar el bot después:"
-    echo "cd grupos"
-    echo "./start-bot.sh"
+    echo "cd grupos/whatsapp-bot"
+    echo "node bot.js"
     echo ""
-    echo "🔋 Para desactivar wake lock manualmente:"
+    echo "🔋 El wake lock ya está activado. Para desactivarlo:"
     echo "termux-wake-unlock"
     echo ""
 fi
