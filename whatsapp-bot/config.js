@@ -113,7 +113,7 @@ const CONFIG = {
 };
 
 // ============================================
-// VARIABLES GLOBALES
+// VARIABLES GLOBALES (USAR LET PARA LAS QUE SE REASIGNAN)
 // ============================================
 let timersEnvios = [];
 let configNegocio = {};
@@ -130,6 +130,12 @@ const store = makeInMemoryStore({
 });
 
 // ============================================
+// CACHES ADICIONALES
+// ============================================
+const groupCache = new Map();
+const imagenesUsadasEnLote = new Set();
+
+// ============================================
 // EXPORTAR TODO
 // ============================================
 module.exports = {
@@ -141,6 +147,6 @@ module.exports = {
     agendaEnMemoria,
     mensajesEnProcesamiento,
     store,
-    groupCache: new Map(),
-    imagenesUsadasEnLote: new Set()
+    groupCache,
+    imagenesUsadasEnLote
 };
