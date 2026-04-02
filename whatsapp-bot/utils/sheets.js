@@ -5,7 +5,7 @@
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
-const { CONFIG, configNegocio, productosCache, ultimaActualizacionProductos, agendaEnMemoria } = require('../config');
+const { CONFIG, productosCache, ultimaActualizacionProductos } = require('../config');
 const { guardarLogLocal } = require('./logs');
 
 // ============================================
